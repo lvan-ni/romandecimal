@@ -6,6 +6,6 @@
     "target": "ES2015",
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": ["server/src"],
   "exclude": ["node_modules"],
 }
