@@ -1,4 +1,9 @@
-const ref = [
+interface RomanDecimalPair {
+  decimal: number;
+  roman: string;
+}
+
+const ref: RomanDecimalPair[] = [
   { decimal: 1000, roman: 'M' },
   { decimal: 900, roman: 'CM' },
   { decimal: 500, roman: 'D' },
@@ -19,37 +24,32 @@ const converter = (input: number | string): number | string => {
 
   if (typeof input === 'number') {
     
-    // const toRoman  = (input: number): number | string => {
       if(input < 1 || input > 3000) throw new Error('1 - 3000 only')
        let romanResult = '';
       // 3000 => 'MMM'
-      ref.map(({decimal, roman}) => {
-        while(input >= decimal) {
+      ref.map(({decimal, roman}: RomanDecimalPair) => {
+        while(input as number >= decimal) {
           romanResult += roman;
-          input -= decimal;
+          (input as number) -= decimal;
         }
       })
       return romanResult;
-    // }
-    // return toRoman;
 
   }
 
-  if (typeof input === 'string') {
+if (typeof input === 'string') {
 
-    // const toDecimal = (input: string): number | string => {
-      let decimalResult = 0; 
-      // 'MMM' => 3000
-      ref.map(({decimal, roman}) => {
-        while(input.startsWith(roman)) {
-          decimalResult += decimal;
-          input = input.substring(roman.length);
-        }
-      })
-      return decimalResult;
-    // }
-    // return toDecimal;
-  }
+    let decimalResult = 0; 
+    // 'MMM' => 3000
+    ref.map(({decimal, roman}: RomanDecimalPair) => {
+      while((input as string).startsWith(roman)) {
+        decimalResult += decimal;
+        input = (input as string).substring(roman.length);
+      }
+    })
+    return decimalResult;
+
+}
   
 }
 
